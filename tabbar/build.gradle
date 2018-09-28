@@ -77,7 +77,7 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = "maven"
-        name = "tabbar  " //项目在JCenter的名字
+        name = "tabbar" //项目在JCenter的名字
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
