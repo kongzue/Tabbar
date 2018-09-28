@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TabBar">
+        <attr name="tabPaddingVertical" format="dimension"/>
+        <attr name="iconPadding" format="dimension"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="focusColor" format="color"/>
+        <attr name="normalColor" format="color"/>
+    </declare-styleable>
+</resources>

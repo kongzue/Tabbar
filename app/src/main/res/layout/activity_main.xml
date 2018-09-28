@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#e4e4e4"></FrameLayout>
+
+        <com.kongzue.tabbar.TabBarView
+            android:id="@+id/tabbar"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            app:focusColor="#3e78ed"
+            app:iconPadding="2dp"
+            app:normalColor="#606060"
+            app:textSize="12dp"
+            app:tabPaddingVertical="5dp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
