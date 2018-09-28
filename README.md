@@ -104,10 +104,11 @@ new Tab("首页", drawable);                            //使用 drawable 创建
 Tab 亦支持 get、set 方法，可以通过他们设置属性值。
 
 其次，关于 Tab 字段的说明：
-字段 | 含义
----|---
-name  | Tab 标签名称
-icon  | Tab 图标
+
+字段 | 含义 | 是否必须
+---|---|---
+name  | Tab 标签名称|是
+icon  | Tab 图标| 是
 
 2) 按钮点击监听
 
