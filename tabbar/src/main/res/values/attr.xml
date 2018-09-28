@@ -6,5 +6,10 @@
         <attr name="textSize" format="dimension"/>
         <attr name="focusColor" format="color"/>
         <attr name="normalColor" format="color"/>
+        <attr name="tabClickBackground">
+            <enum name="ripple" value="0"/>
+            <enum name="rippleOutside" value="1"/>
+            <enum name="gray" value="2"/>
+        </attr>
     </declare-styleable>
 </resources>

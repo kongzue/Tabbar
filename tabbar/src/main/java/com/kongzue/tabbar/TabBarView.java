@@ -6,17 +6,16 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.kongzue.tabbar.interfaces.OnTabChangeListener;
@@ -36,11 +35,18 @@ public class TabBarView extends LinearLayout {
     private OnTabChangeListener onTabChangeListener;
     private int focusIndex = 0;
     
-    private int tabPaddingVertical;
-    private int iconPadding;
-    private int textSize;
-    private int focusColor;
-    private int normalColor;
+    private int tabPaddingVertical;     //tab按钮上下内边距
+    private int iconPadding;            //图标内边距
+    private int textSize;               //文本字号
+    private int focusColor;             //处于焦点状态的颜色
+    private int normalColor;            //处于普通状态的颜色
+    private int tabClickBackground;     //tab按钮按下效果可选值
+    
+    public enum TabClickBackgroundValue {
+        RIPPLE,                         //矩形水波纹
+        RIPPLE_OUTSIDE,                 //外部弧形水波纹
+        GRAY                            //纯灰色
+    }
     
     private Context context;
     
@@ -73,6 +79,7 @@ public class TabBarView extends LinearLayout {
         tabPaddingVertical = typedArray.getDimensionPixelOffset(R.styleable.TabBar_tabPaddingVertical, tabPaddingVertical);
         focusColor = typedArray.getColor(R.styleable.TabBar_focusColor, focusColor);
         normalColor = typedArray.getColor(R.styleable.TabBar_normalColor, normalColor);
+        tabClickBackground = typedArray.getInt(R.styleable.TabBar_tabClickBackground, TabClickBackgroundValue.RIPPLE.ordinal());
         typedArray.recycle();
     }
     
@@ -94,6 +101,9 @@ public class TabBarView extends LinearLayout {
             Tab tab = tabDatas.get(i);
             View item = LayoutInflater.from(context).inflate(R.layout.item_tab, null, false);
             item.setPadding(0, tabPaddingVertical, 0, tabPaddingVertical);
+    
+            refreshBackground(item);
+            
             addView(item);
             
             ImageView imgIcon = item.findViewById(R.id.img_icon);
@@ -117,6 +127,20 @@ public class TabBarView extends LinearLayout {
         return this;
     }
     
+    private void refreshBackground(View item) {
+        if(tabClickBackground == TabClickBackgroundValue.RIPPLE.ordinal()){
+            TypedValue typedValue = new TypedValue();
+            context.getTheme().resolveAttribute(android.R.attr.selectableItemBackground, typedValue, true);
+            item.setBackgroundResource(typedValue.resourceId);
+        }else if(tabClickBackground == TabClickBackgroundValue.RIPPLE_OUTSIDE.ordinal()){
+            TypedValue typedValue = new TypedValue();
+            context.getTheme().resolveAttribute(android.R.attr.selectableItemBackgroundBorderless, typedValue, true);
+            item.setBackgroundResource(typedValue.resourceId);
+        }else{
+            item.setBackgroundResource(R.drawable.tab_gray_background);
+        }
+    }
+    
     private void refreshFocusTabStatus() {
         for (int i = 0; i < tabViews.size(); i++) {
             View item = tabViews.get(i);
@@ -136,15 +160,124 @@ public class TabBarView extends LinearLayout {
     private void setEvents() {
         for (int i = 0; i < tabViews.size(); i++) {
             View item = tabViews.get(i);
-            final int selectIndex=i;
+            final int selectIndex = i;
             item.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     focusIndex = selectIndex;
                     refreshFocusTabStatus();
-                    if (onTabChangeListener!=null)onTabChangeListener.onTabChanged(focusIndex);
+                    if (onTabChangeListener != null) onTabChangeListener.onTabChanged(focusIndex);
                 }
             });
+        }
+    }
+    public OnTabChangeListener getOnTabChangeListener() {
+        return onTabChangeListener;
+    }
+    
+    /**
+     * 设置点击Tab监听器
+     * @param onTabChangeListener
+     */
+    public TabBarView setOnTabChangeListener(OnTabChangeListener onTabChangeListener) {
+        this.onTabChangeListener = onTabChangeListener;
+        return this;
+    }
+    
+    public int getFocusIndex() {
+        return focusIndex;
+    }
+    
+    /**
+     * 设置默认选中的Tab
+     * @param focusIndex
+     */
+    public TabBarView setNormalFocusIndex(int focusIndex) {
+        this.focusIndex = focusIndex;
+        refreshFocusTabStatus();
+        return this;
+    }
+    
+    public int getTabPaddingVertical() {
+        return tabPaddingVertical;
+    }
+    
+    /**
+     * 设置tab按钮上下内边距
+     * @param tabPaddingVertical (pixel)
+     */
+    public TabBarView setTabPaddingVertical(int tabPaddingVertical) {
+        this.tabPaddingVertical = tabPaddingVertical;
+        return this;
+    }
+    
+    public int getIconPadding() {
+        return iconPadding;
+    }
+    
+    /**
+     * 设置图标内边距
+     * @param iconPadding (pixel)
+     */
+    public TabBarView setIconPadding(int iconPadding) {
+        this.iconPadding = iconPadding;
+        return this;
+    }
+    
+    public int getTextSize() {
+        return textSize;
+    }
+    
+    /**
+     * 设置文本字号
+     * @param textSize (pixel)
+     */
+    public TabBarView setTextSize(int textSize) {
+        this.textSize = textSize;
+        return this;
+    }
+    
+    public int getFocusColor() {
+        return focusColor;
+    }
+    
+    /**
+     * 设置处于焦点状态的颜色
+     * @param focusColor ColorInt
+     */
+    public TabBarView setFocusColor(@ColorInt int focusColor) {
+        this.focusColor = focusColor;
+        return this;
+    }
+    
+    public int getNormalColor() {
+        return normalColor;
+    }
+    
+    /**
+     * 设置处于普通状态的颜色
+     * @param normalColor ColorInt
+     */
+    public TabBarView setNormalColor(@ColorInt int normalColor) {
+        this.normalColor = normalColor;
+        return this;
+    }
+    
+    public int getTabClickBackground() {
+        return tabClickBackground;
+    }
+    
+    /**
+     * 设置Tab按下效果
+     * @param value {@link TabClickBackgroundValue#RIPPLE }{@link TabClickBackgroundValue#RIPPLE_OUTSIDE }{@link TabClickBackgroundValue#GRAY }
+     */
+    public void setTabClickBackground(TabClickBackgroundValue value) {
+        this.tabClickBackground = value.ordinal();
+        if (tabViews!=null && !tabViews.isEmpty()){
+            for (int i = 0; i < tabViews.size(); i++) {
+                View item = tabViews.get(i);
+                refreshBackground(item);
+            }
         }
     }
     
@@ -161,7 +294,7 @@ public class TabBarView extends LinearLayout {
         return (pxValue / Resources.getSystem().getDisplayMetrics().density);
     }
     
-    public void setImageViewColor(ImageView view, int color) {
+    protected void setImageViewColor(ImageView view, int color) {
         Drawable modeDrawable = view.getDrawable().mutate();
         Drawable temp = DrawableCompat.wrap(modeDrawable);
         ColorStateList colorStateList = ColorStateList.valueOf(color);
@@ -169,67 +302,4 @@ public class TabBarView extends LinearLayout {
         view.setImageDrawable(temp);
     }
     
-    public OnTabChangeListener getOnTabChangeListener() {
-        return onTabChangeListener;
-    }
-    
-    public TabBarView setOnTabChangeListener(OnTabChangeListener onTabChangeListener) {
-        this.onTabChangeListener = onTabChangeListener;
-        return this;
-    }
-    
-    public int getFocusIndex() {
-        return focusIndex;
-    }
-    
-    public TabBarView setNormalFocusIndex(int focusIndex) {
-        this.focusIndex = focusIndex;
-        refreshFocusTabStatus();
-        return this;
-    }
-    
-    public int getTabPaddingVertical() {
-        return tabPaddingVertical;
-    }
-    
-    public TabBarView setTabPaddingVertical(int tabPaddingVertical) {
-        this.tabPaddingVertical = tabPaddingVertical;
-        return this;
-    }
-    
-    public int getIconPadding() {
-        return iconPadding;
-    }
-    
-    public TabBarView setIconPadding(int iconPadding) {
-        this.iconPadding = iconPadding;
-        return this;
-    }
-    
-    public int getTextSize() {
-        return textSize;
-    }
-    
-    public TabBarView setTextSize(int textSize) {
-        this.textSize = textSize;
-        return this;
-    }
-    
-    public int getFocusColor() {
-        return focusColor;
-    }
-    
-    public TabBarView setFocusColor(int focusColor) {
-        this.focusColor = focusColor;
-        return this;
-    }
-    
-    public int getNormalColor() {
-        return normalColor;
-    }
-    
-    public TabBarView setNormalColor(int normalColor) {
-        this.normalColor = normalColor;
-        return this;
-    }
 }

@@ -2,10 +2,10 @@
 Kongzue Tabbar是一款简单的底部导航栏组件，仅需要简单配置即可满足绝大多数需要使用导航栏的场景。
 
 <a href="https://github.com/kongzue/Tabbar/">
-<img src="https://img.shields.io/badge/Tabbar-1.0-green.svg" alt="Kongzue BaseFramework">
+<img src="https://img.shields.io/badge/Tabbar-1.1-green.svg" alt="Kongzue BaseFramework">
 </a>
-<a href="https://bintray.com/myzchh/maven/tabbar/1.0/link">
-<img src="https://img.shields.io/badge/Maven-1.0-blue.svg" alt="Maven">
+<a href="https://bintray.com/myzchh/maven/tabbar/1.1/link">
+<img src="https://img.shields.io/badge/Maven-1.1-blue.svg" alt="Maven">
 </a>
 <a href="http://www.apache.org/licenses/LICENSE-2.0">
 <img src="https://img.shields.io/badge/License-Apache%202.0-red.svg" alt="License">
@@ -31,14 +31,14 @@ Maven仓库：
 <dependency>
   <groupId>com.kongzue.tabbar</groupId>
   <artifactId>tabbar</artifactId>
-  <version>1.0</version>
+  <version>1.1</version>
   <type>pom</type>
 </dependency>
 ```
 Gradle：
 在dependencies{}中添加引用：
 ```
-implementation 'com.kongzue.tabbar:tabbar:1.0'
+implementation 'com.kongzue.tabbar:tabbar:1.1'
 ```
 
 2) 从XML布局文件创建：
@@ -63,16 +63,18 @@ normalColor  | 处于普通状态的颜色  | #606060
 iconPadding | 图标内边距  | 5dp
 textSize  | 文本字号  | 12dp
 tabPaddingVertical  | tab按钮上下内边距  | 5dp
+tabClickBackground  | tab按钮按下效果  | ripple
 
 也可通过set方法设置：
 ```
 tabbar = findViewById(R.id.tabbar);
 
-tabbar.setFocusColor(Color.rgb(62, 120, 238));      //处于焦点状态的颜色
-tabbar.setNormalColor(Color.rgb(96, 96, 96));       //处于普通状态的颜色
-tabbar.setTextSize(dp2px(12));                      //文本字号
-tabbar.setIconPadding(dp2px(5));                    //图标内边距
-tabbar.setTabPaddingVertical(dp2px(5));             //tab按钮上下内边距
+tabbar.setFocusColor(Color.rgb(62, 120, 238));                              //处于焦点状态的颜色
+tabbar.setNormalColor(Color.rgb(96, 96, 96));                               //处于普通状态的颜色
+tabbar.setTextSize(dp2px(12));                                              //文本字号
+tabbar.setIconPadding(dp2px(5));                                            //图标内边距
+tabbar.setTabPaddingVertical(dp2px(5));                                     //tab按钮上下内边距
+tabbar.setTabClickBackground(TabBarView.TabClickBackgroundValue.RIPPLE);    //tab按钮按下效果
 ```
 
 3) 创建Tab：
@@ -131,6 +133,18 @@ tabbar.setNormalFocusIndex(index);
 ```
 其中，index 即要设置为焦点的按钮的索引号。
 
+4) 当前提供三种 Tab 按钮按下效果:
+
+字段 | 含义 | 是否默认
+---|---|---
+ripple  | 默认矩形水波纹效果|是
+rippleOutside  | 外弧形水波纹效果|否
+gray  | 纯灰色| 否
+
+具体表现效果如下：
+
+![TabbarClick](https://github.com/kongzue/Res/raw/master/app/src/main/res/mipmap-xxxhdpi/tabclickbkg.png)
+
 ## 开源协议
 ```
 Copyright Tabbar
@@ -147,4 +161,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
+
+## 更新日志
+v1.1:
+- 新增属性 “tabClickBackground” 控制按下的不同效果；
+- 新增部分注释；
 

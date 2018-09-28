@@ -27,7 +27,8 @@
             app:iconPadding="2dp"
             app:normalColor="#606060"
             app:textSize="12dp"
-            app:tabPaddingVertical="5dp"/>
+            app:tabPaddingVertical="5dp"
+            app:tabClickBackground="ripple"/>
 
     </LinearLayout>
 
