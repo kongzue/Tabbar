@@ -150,6 +150,7 @@ gray  | 纯灰色| 否
 ![TabbarClick](https://github.com/kongzue/Res/raw/master/app/src/main/res/mipmap-xxxhdpi/tabclickbkg.png)
 
 5) 关于沉浸式
+
 当您设置开启沉浸式时可能会出现 Tabbar 被底部按键导航栏（NavigationBar）遮挡的问题，此时开启 paddingNavigationBar 即可解决此问题。设置方法为：
 
 在XML布局中：
@@ -160,6 +161,7 @@ app:paddingNavigationBar = "true"
 开启后，Tabbar会自动设置一段 paddingBottom 边距以适应底栏高度。
 
 6) 启用角标
+
 在您创建一个Tab的时候，可以为其设置角标。
 
 ![TabbarUnread](https://github.com/kongzue/Res/raw/master/app/src/main/res/mipmap-xxxhdpi/tabbar_unread_demo.png)
