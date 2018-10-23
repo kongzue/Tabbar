@@ -2,10 +2,10 @@
 Kongzue Tabbar是一款简单的底部导航栏组件，仅需要简单配置即可满足绝大多数需要使用导航栏的场景。
 
 <a href="https://github.com/kongzue/Tabbar/">
-<img src="https://img.shields.io/badge/Tabbar-1.1-green.svg" alt="Kongzue BaseFramework">
+<img src="https://img.shields.io/badge/Tabbar-1.2-green.svg" alt="Kongzue Tabbar">
 </a>
-<a href="https://bintray.com/myzchh/maven/tabbar/1.1/link">
-<img src="https://img.shields.io/badge/Maven-1.1-blue.svg" alt="Maven">
+<a href="https://bintray.com/myzchh/maven/tabbar/1.2/link">
+<img src="https://img.shields.io/badge/Maven-1.2-blue.svg" alt="Maven">
 </a>
 <a href="http://www.apache.org/licenses/LICENSE-2.0">
 <img src="https://img.shields.io/badge/License-Apache%202.0-red.svg" alt="License">
@@ -31,14 +31,14 @@ Maven仓库：
 <dependency>
   <groupId>com.kongzue.tabbar</groupId>
   <artifactId>tabbar</artifactId>
-  <version>1.1</version>
+  <version>1.2</version>
   <type>pom</type>
 </dependency>
 ```
 Gradle：
 在dependencies{}中添加引用：
 ```
-implementation 'com.kongzue.tabbar:tabbar:1.1'
+implementation 'com.kongzue.tabbar:tabbar:1.2'
 ```
 
 2) 从XML布局文件创建：
@@ -51,7 +51,8 @@ implementation 'com.kongzue.tabbar:tabbar:1.1'
     app:iconPadding="2dp"
     app:normalColor="#606060"
     app:textSize="12dp"
-    app:tabPaddingVertical="5dp"/>
+    app:tabPaddingVertical="5dp"
+    app:paddingNavigationBar="false"/>
 ```
 
 其中各属性解释如下：
@@ -64,6 +65,7 @@ iconPadding | 图标内边距  | 5dp
 textSize  | 文本字号  | 12dp
 tabPaddingVertical  | tab按钮上下内边距  | 5dp
 tabClickBackground  | tab按钮按下效果  | ripple
+paddingNavigationBar | 是否开启底部导航栏沉浸式 | false
 
 也可通过set方法设置：
 ```
@@ -145,6 +147,16 @@ gray  | 纯灰色| 否
 
 ![TabbarClick](https://github.com/kongzue/Res/raw/master/app/src/main/res/mipmap-xxxhdpi/tabclickbkg.png)
 
+5) 关于沉浸式
+当您设置开启沉浸式时可能会出现 Tabbar 被底部按键导航栏（NavigationBar）遮挡的问题，此时开启 paddingNavigationBar 即可解决此问题。设置方法为：
+
+在XML布局中：
+```
+app:paddingNavigationBar = "true"
+```
+
+开启后，Tabbar会自动设置一段 paddingBottom 边距以适应底栏高度。
+
 ## 开源协议
 ```
 Copyright Tabbar
@@ -163,6 +175,10 @@ limitations under the License.
 ```
 
 ## 更新日志
+v1.2:
+- 修复bug；
+- 新增属性 paddingNavigationBar 底栏沉浸式开关（具体请参照文档）；
+
 v1.1:
 - 新增属性 “tabClickBackground” 控制按下的不同效果；
 - 新增部分注释；

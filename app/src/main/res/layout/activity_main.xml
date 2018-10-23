@@ -28,7 +28,8 @@
             app:normalColor="#606060"
             app:textSize="12dp"
             app:tabPaddingVertical="5dp"
-            app:tabClickBackground="ripple"/>
+            app:tabClickBackground="ripple"
+            app:paddingNavigationBar="true"/>
 
     </LinearLayout>
 
