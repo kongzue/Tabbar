@@ -2,10 +2,10 @@
 Kongzue Tabbar是一款简单的底部导航栏组件，仅需要简单配置即可满足绝大多数需要使用导航栏的场景。
 
 <a href="https://github.com/kongzue/Tabbar/">
-<img src="https://img.shields.io/badge/Tabbar-1.2-green.svg" alt="Kongzue Tabbar">
+<img src="https://img.shields.io/badge/Tabbar-1.3-green.svg" alt="Kongzue Tabbar">
 </a>
-<a href="https://bintray.com/myzchh/maven/tabbar/1.2/link">
-<img src="https://img.shields.io/badge/Maven-1.2-blue.svg" alt="Maven">
+<a href="https://bintray.com/myzchh/maven/tabbar/1.3/link">
+<img src="https://img.shields.io/badge/Maven-1.3-blue.svg" alt="Maven">
 </a>
 <a href="http://www.apache.org/licenses/LICENSE-2.0">
 <img src="https://img.shields.io/badge/License-Apache%202.0-red.svg" alt="License">
@@ -31,14 +31,14 @@ Maven仓库：
 <dependency>
   <groupId>com.kongzue.tabbar</groupId>
   <artifactId>tabbar</artifactId>
-  <version>1.2</version>
+  <version>1.3</version>
   <type>pom</type>
 </dependency>
 ```
 Gradle：
 在dependencies{}中添加引用：
 ```
-implementation 'com.kongzue.tabbar:tabbar:1.2'
+implementation 'com.kongzue.tabbar:tabbar:1.3'
 ```
 
 2) 从XML布局文件创建：
@@ -157,6 +157,17 @@ app:paddingNavigationBar = "true"
 
 开启后，Tabbar会自动设置一段 paddingBottom 边距以适应底栏高度。
 
+6) 启用角标
+在您创建一个Tab的时候，可以为其设置角标。
+
+![TabbarUnread](https://github.com/kongzue/Res/raw/master/app/src/main/res/mipmap-xxxhdpi/tabbar_unread_demo.png)
+
+例如：
+```
+new Tab(this, "联系人", R.mipmap.img_maintab_contacts).setUnreadNum(123).setMaxUnreadNum(99);
+```
+其中，UnreadNum 为角标数字，为负数时不显示数字只显示一个红点，当 UnreadNum 超过 MaxUnreadNum 的值时会显示为 MaxUnreadNum+，例如上边的示例会显示为“99+”
+
 ## 开源协议
 ```
 Copyright Tabbar
@@ -175,6 +186,9 @@ limitations under the License.
 ```
 
 ## 更新日志
+v1.3:
+- 支持角标显示；
+
 v1.2:
 - 修复bug；
 - 新增属性 paddingNavigationBar 底栏沉浸式开关（具体请参照文档）；

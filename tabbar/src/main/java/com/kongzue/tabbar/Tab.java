@@ -21,6 +21,8 @@ public class Tab {
     
     private String name;
     private Bitmap icon;
+    private int unreadNum;
+    private int maxUnreadNum = 999;
     
     public Tab(@Nullable Context context, @Nullable String name, @DrawableRes int resId) {
         setName(name);
@@ -63,6 +65,24 @@ public class Tab {
     public Tab setIcon(@Nullable Drawable drawable) {
         BitmapDrawable bd = (BitmapDrawable) drawable;
         this.icon = bd.getBitmap();
+        return this;
+    }
+    
+    public int getUnreadNum() {
+        return unreadNum;
+    }
+    
+    public Tab setUnreadNum(int unreadNum) {
+        this.unreadNum = unreadNum;
+        return this;
+    }
+    
+    public int getMaxUnreadNum() {
+        return maxUnreadNum;
+    }
+    
+    public Tab setMaxUnreadNum(int maxUnreadNum) {
+        this.maxUnreadNum = maxUnreadNum;
         return this;
     }
 }

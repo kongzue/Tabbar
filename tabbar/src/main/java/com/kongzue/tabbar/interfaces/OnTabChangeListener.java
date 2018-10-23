@@ -1,5 +1,7 @@
 package com.kongzue.tabbar.interfaces;
 
+import android.view.View;
+
 /**
  * Author: @Kongzue
  * Github: https://github.com/kongzue/
@@ -8,5 +10,5 @@ package com.kongzue.tabbar.interfaces;
  * CreateTime: 2018/9/28 12:17
  */
 public interface OnTabChangeListener {
-    void onTabChanged(int index);
+    void onTabChanged(View v, int index);
 }

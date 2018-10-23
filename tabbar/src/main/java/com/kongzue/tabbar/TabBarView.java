@@ -16,8 +16,10 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.kongzue.tabbar.interfaces.OnTabChangeListener;
@@ -104,23 +106,52 @@ public class TabBarView extends LinearLayout {
         normalColor = Color.rgb(96, 96, 96);
     }
     
-    public TabBarView setTab(List<Tab> tabDatas) {
+    private ImageView imgIcon;
+    private RelativeLayout boxNoread;
+    private TextView txtNoread;
+    private TextView txtName;
+    
+    private View rootView;
+    private List<Tab> tabDatas;
+    
+    public TabBarView setTab(List<Tab> datas) {
+        tabDatas = datas;
         removeAllViews();
         tabViews = new ArrayList<>();
         for (int i = 0; i < tabDatas.size(); i++) {
             Tab tab = tabDatas.get(i);
-            View item = LayoutInflater.from(context).inflate(R.layout.item_tab, null, false);
+            final View item = LayoutInflater.from(context).inflate(R.layout.item_tab, null, false);
             item.setPadding(0, tabPaddingVertical, 0, tabPaddingVertical);
             
             refreshBackground(item);
             
             addView(item);
             
-            ImageView imgIcon = item.findViewById(R.id.img_icon);
-            TextView txtName = item.findViewById(R.id.txt_name);
+            imgIcon = item.findViewById(R.id.img_icon);
+            boxNoread = item.findViewById(R.id.box_noread);
+            txtNoread = item.findViewById(R.id.txt_noread);
+            txtName = item.findViewById(R.id.txt_name);
             
             imgIcon.setImageBitmap(tab.getIcon());
             txtName.setText(tab.getName());
+            
+            if (tab.getUnreadNum() != 0) {
+                boxNoread.setVisibility(VISIBLE);
+                int left = (int) ((height - tabPaddingVertical - textSize) * 0.55);
+                boxNoread.setX(left);
+                if (tab.getUnreadNum() < 0) {
+                    txtNoread.setVisibility(GONE);
+                } else {
+                    txtNoread.setVisibility(VISIBLE);
+                    if (tab.getUnreadNum()>tab.getMaxUnreadNum()){
+                        txtNoread.setText(tab.getMaxUnreadNum() + "+");
+                    }else {
+                        txtNoread.setText(tab.getUnreadNum() + "");
+                    }
+                }
+            } else {
+                boxNoread.setVisibility(GONE);
+            }
             
             imgIcon.setPadding(iconPadding, iconPadding, iconPadding, iconPadding);
             txtName.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
@@ -176,7 +207,8 @@ public class TabBarView extends LinearLayout {
                 public void onClick(View v) {
                     focusIndex = selectIndex;
                     refreshFocusTabStatus();
-                    if (onTabChangeListener != null) onTabChangeListener.onTabChanged(focusIndex);
+                    if (onTabChangeListener != null)
+                        onTabChangeListener.onTabChanged(v, focusIndex);
                 }
             });
         }
@@ -330,7 +362,7 @@ public class TabBarView extends LinearLayout {
                 int navHeight = NavigationBarUtil.getNavbarHeight((Activity) context);
                 int newHeight = height + navHeight;
                 setMeasuredDimension(getMeasuredWidth(), newHeight);//设置宽高
-                setPadding(0, -navHeight/2, 0, navHeight/2);
+                setPadding(0, -navHeight / 2, 0, navHeight / 2);
             }
         }
     }

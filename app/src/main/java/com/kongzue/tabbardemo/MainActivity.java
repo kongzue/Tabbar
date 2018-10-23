@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.kongzue.tabbar.Tab;
 import com.kongzue.tabbar.TabBarView;
@@ -24,13 +25,13 @@ public class MainActivity extends AppCompatActivity {
         
         List<Tab> tabs = new ArrayList<>();
         tabs.add(new Tab(this, "首页", R.mipmap.img_maintab_home));
-        tabs.add(new Tab(this, "联系人", R.mipmap.img_maintab_contacts));
+        tabs.add(new Tab(this, "联系人", R.mipmap.img_maintab_contacts).setUnreadNum(-5).setMaxUnreadNum(99));
         tabs.add(new Tab(this, "我的", R.mipmap.img_maintab_me));
         
         tabbar.setTab(tabs)
                 .setOnTabChangeListener(new OnTabChangeListener() {
                     @Override
-                    public void onTabChanged(int index) {
+                    public void onTabChanged(View v, int index) {
                         Log.i(">>>", "onTabChanged: " + index);
                     }
                 })
