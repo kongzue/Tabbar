@@ -166,7 +166,7 @@ app:paddingNavigationBar = "true"
 ```
 new Tab(this, "联系人", R.mipmap.img_maintab_contacts).setUnreadNum(123).setMaxUnreadNum(99);
 ```
-其中，UnreadNum 为角标数字，为负数时不显示数字只显示一个红点，当 UnreadNum 超过 MaxUnreadNum 的值时会显示为 MaxUnreadNum+，例如上边的示例会显示为“99+”
+其中，UnreadNum 为角标数字，值为 0 时隐藏角标，为负数时不显示数字只显示一个红点，当 UnreadNum 超过 MaxUnreadNum 的值时会显示为 MaxUnreadNum+，例如上边的示例会显示为“99+”
 
 ## 开源协议
 ```
