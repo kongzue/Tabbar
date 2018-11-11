@@ -49,11 +49,14 @@ public class TabBarView extends LinearLayout {
     private int normalColor;                //处于普通状态的颜色
     private int tabClickBackground;         //tab按钮按下效果可选值
     private boolean paddingNavigationBar;   //padding底部导航栏高度
+    private boolean noDyeing;               //不使用颜色渲染（即使用图表本身的颜色）
+    private boolean noSelect;               //不选中模式（）
     
     public enum TabClickBackgroundValue {
         RIPPLE,                         //矩形水波纹
         RIPPLE_OUTSIDE,                 //外部弧形水波纹
-        GRAY                            //纯灰色
+        GRAY,                           //纯灰色
+        EMPTY                           //空
     }
     
     private Context context;
@@ -91,6 +94,8 @@ public class TabBarView extends LinearLayout {
         normalColor = typedArray.getColor(R.styleable.TabBar_normalColor, normalColor);
         tabClickBackground = typedArray.getInt(R.styleable.TabBar_tabClickBackground, TabClickBackgroundValue.RIPPLE.ordinal());
         paddingNavigationBar = typedArray.getBoolean(R.styleable.TabBar_paddingNavigationBar, paddingNavigationBar);
+        noDyeing = typedArray.getBoolean(R.styleable.TabBar_noDyeing, noDyeing);
+        noSelect = typedArray.getBoolean(R.styleable.TabBar_noSelect, noSelect);
         
         typedArray.recycle();
     }
@@ -177,12 +182,15 @@ public class TabBarView extends LinearLayout {
             TypedValue typedValue = new TypedValue();
             context.getTheme().resolveAttribute(android.R.attr.selectableItemBackgroundBorderless, typedValue, true);
             item.setBackgroundResource(typedValue.resourceId);
-        } else {
+        } else if (tabClickBackground == TabClickBackgroundValue.GRAY.ordinal()) {
             item.setBackgroundResource(R.drawable.tab_gray_background);
+        }else{
+            item.setBackgroundColor(Color.argb(0,0,0,0));
         }
     }
     
     private void refreshFocusTabStatus() {
+        if (noSelect)return;
         for (int i = 0; i < tabViews.size(); i++) {
             View item = tabViews.get(i);
             ImageView imgIcon = item.findViewById(R.id.img_icon);
@@ -320,7 +328,7 @@ public class TabBarView extends LinearLayout {
     /**
      * 设置Tab按下效果
      *
-     * @param value {@link TabClickBackgroundValue#RIPPLE }{@link TabClickBackgroundValue#RIPPLE_OUTSIDE }{@link TabClickBackgroundValue#GRAY }
+     * @param value {@link TabClickBackgroundValue#RIPPLE }{@link TabClickBackgroundValue#RIPPLE_OUTSIDE }{@link TabClickBackgroundValue#GRAY }{@link TabClickBackgroundValue#EMPTY }
      */
     public void setTabClickBackground(TabClickBackgroundValue value) {
         this.tabClickBackground = value.ordinal();
@@ -330,6 +338,24 @@ public class TabBarView extends LinearLayout {
                 refreshBackground(item);
             }
         }
+    }
+    
+    public boolean isNoDyeing() {
+        return noDyeing;
+    }
+    
+    public TabBarView setNoDyeing(boolean noDyeing) {
+        this.noDyeing = noDyeing;
+        return this;
+    }
+    
+    public boolean isNoSelect() {
+        return noSelect;
+    }
+    
+    public TabBarView setNoSelect(boolean noSelect) {
+        this.noSelect = noSelect;
+        return this;
     }
     
     @Override
@@ -346,13 +372,13 @@ public class TabBarView extends LinearLayout {
     }
     
     protected void setImageViewColor(ImageView view, int color) {
+        if (noDyeing) return;
         Drawable modeDrawable = view.getDrawable().mutate();
         Drawable temp = DrawableCompat.wrap(modeDrawable);
         ColorStateList colorStateList = ColorStateList.valueOf(color);
         DrawableCompat.setTintList(temp, colorStateList);
         view.setImageDrawable(temp);
     }
-    
     
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {

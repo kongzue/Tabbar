@@ -2,10 +2,10 @@
 Kongzue Tabbar是一款简单的底部导航栏组件，仅需要简单配置即可满足绝大多数需要使用导航栏的场景。
 
 <a href="https://github.com/kongzue/Tabbar/">
-<img src="https://img.shields.io/badge/Tabbar-1.3-green.svg" alt="Kongzue Tabbar">
+<img src="https://img.shields.io/badge/Tabbar-1.4-green.svg" alt="Kongzue Tabbar">
 </a>
-<a href="https://bintray.com/myzchh/maven/tabbar/1.3/link">
-<img src="https://img.shields.io/badge/Maven-1.3-blue.svg" alt="Maven">
+<a href="https://bintray.com/myzchh/maven/tabbar/1.4/link">
+<img src="https://img.shields.io/badge/Maven-1.4-blue.svg" alt="Maven">
 </a>
 <a href="http://www.apache.org/licenses/LICENSE-2.0">
 <img src="https://img.shields.io/badge/License-Apache%202.0-red.svg" alt="License">
@@ -33,14 +33,14 @@ Maven仓库：
 <dependency>
   <groupId>com.kongzue.tabbar</groupId>
   <artifactId>tabbar</artifactId>
-  <version>1.3</version>
+  <version>1.4</version>
   <type>pom</type>
 </dependency>
 ```
 Gradle：
 在dependencies{}中添加引用：
 ```
-implementation 'com.kongzue.tabbar:tabbar:1.3'
+implementation 'com.kongzue.tabbar:tabbar:1.4'
 ```
 
 2) 从XML布局文件创建：
@@ -68,6 +68,8 @@ textSize  | 文本字号  | 12dp
 tabPaddingVertical  | tab按钮上下内边距  | 5dp
 tabClickBackground  | tab按钮按下效果  | ripple
 paddingNavigationBar | 是否开启底部导航栏沉浸式 | false
+noDyeing | 禁止染色 | false
+noSelect | 禁止选择 | false
 
 也可通过set方法设置：
 ```
@@ -79,6 +81,10 @@ tabbar.setTextSize(dp2px(12));                                              //�
 tabbar.setIconPadding(dp2px(5));                                            //图标内边距
 tabbar.setTabPaddingVertical(dp2px(5));                                     //tab按钮上下内边距
 tabbar.setTabClickBackground(TabBarView.TabClickBackgroundValue.RIPPLE);    //tab按钮按下效果
+
+//从 1.4 版本起，新增两个新的选项：
+tabbar.setNoSelect(false);                                                  //是否禁止选择效果
+tabbar.setNoDyeing(false);                                                  //是否禁止颜色渲染
 ```
 
 3) 创建Tab：
@@ -172,6 +178,34 @@ new Tab(this, "联系人", R.mipmap.img_maintab_contacts).setUnreadNum(123).setM
 ```
 其中，UnreadNum 为角标数字，值为 0 时隐藏角标，为负数时不显示数字只显示一个红点，当 UnreadNum 超过 MaxUnreadNum 的值时会显示为 MaxUnreadNum+，例如上边的示例会显示为“99+”
 
+7) 禁用选择和禁用染色
+
+1.4 版本起，新增了禁止选择（noSelect）和禁止颜色渲染（noDyeing）的选项，其目的是使 Tabbar 能够有更为广泛的应用场景，其中典型的场景为电商的分类选择，如下图所示：
+
+![TabbarUnread](https://github.com/kongzue/Res/raw/master/app/src/main/res/mipmap-xxxhdpi/tabbar_noselect_and_nodyeing.png)
+
+您可以通过 XML 布局文件中直接设置这些属性：
+```
+<com.kongzue.tabbar.TabBarView
+    android:id="@+id/selectTabbar"
+    android:layout_width="match_parent"
+    android:layout_height="65dp"
+    app:iconPadding="2dp"
+    app:noDyeing="true"
+    app:noSelect="true"
+    app:normalColor="#606060"
+    app:paddingNavigationBar="false"
+    app:tabClickBackground="empty"
+    app:tabPaddingVertical="5dp"
+    app:textSize="12dp" />
+```
+
+也可以通过代码设置：
+```
+tabbar.setNoSelect(false);
+tabbar.setNoDyeing(false);
+```
+
 ## 开源协议
 ```
 Copyright Tabbar
@@ -190,6 +224,9 @@ limitations under the License.
 ```
 
 ## 更新日志
+v1.4:
+- 新增支持禁止选择（noSelect）和禁止颜色渲染（noDyeing）的选项；
+
 v1.3:
 - 支持角标显示；
 
