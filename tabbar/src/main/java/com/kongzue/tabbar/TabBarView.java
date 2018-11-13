@@ -148,9 +148,9 @@ public class TabBarView extends LinearLayout {
                     txtNoread.setVisibility(GONE);
                 } else {
                     txtNoread.setVisibility(VISIBLE);
-                    if (tab.getUnreadNum()>tab.getMaxUnreadNum()){
+                    if (tab.getUnreadNum() > tab.getMaxUnreadNum()) {
                         txtNoread.setText(tab.getMaxUnreadNum() + "+");
-                    }else {
+                    } else {
                         txtNoread.setText(tab.getUnreadNum() + "");
                     }
                 }
@@ -184,22 +184,26 @@ public class TabBarView extends LinearLayout {
             item.setBackgroundResource(typedValue.resourceId);
         } else if (tabClickBackground == TabClickBackgroundValue.GRAY.ordinal()) {
             item.setBackgroundResource(R.drawable.tab_gray_background);
-        }else{
-            item.setBackgroundColor(Color.argb(0,0,0,0));
+        } else {
+            item.setBackgroundColor(Color.argb(0, 0, 0, 0));
         }
     }
     
     private void refreshFocusTabStatus() {
-        if (noSelect)return;
+        if (noSelect) return;
         for (int i = 0; i < tabViews.size(); i++) {
             View item = tabViews.get(i);
             ImageView imgIcon = item.findViewById(R.id.img_icon);
             TextView txtName = item.findViewById(R.id.txt_name);
             
             if (i == focusIndex) {
+                if (tabDatas.get(i).getFocusIcon() != null) {
+                    imgIcon.setImageBitmap(tabDatas.get(i).getFocusIcon());
+                }
                 setImageViewColor(imgIcon, focusColor);
                 txtName.setTextColor(focusColor);
             } else {
+                imgIcon.setImageBitmap(tabDatas.get(i).getIcon());
                 setImageViewColor(imgIcon, normalColor);
                 txtName.setTextColor(normalColor);
             }

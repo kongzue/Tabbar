@@ -2,10 +2,10 @@
 Kongzue Tabbar是一款简单的底部导航栏组件，仅需要简单配置即可满足绝大多数需要使用导航栏的场景。
 
 <a href="https://github.com/kongzue/Tabbar/">
-<img src="https://img.shields.io/badge/Tabbar-1.4-green.svg" alt="Kongzue Tabbar">
+<img src="https://img.shields.io/badge/Tabbar-1.5-green.svg" alt="Kongzue Tabbar">
 </a>
-<a href="https://bintray.com/myzchh/maven/tabbar/1.4/link">
-<img src="https://img.shields.io/badge/Maven-1.4-blue.svg" alt="Maven">
+<a href="https://bintray.com/myzchh/maven/tabbar/1.5/link">
+<img src="https://img.shields.io/badge/Maven-1.5-blue.svg" alt="Maven">
 </a>
 <a href="http://www.apache.org/licenses/LICENSE-2.0">
 <img src="https://img.shields.io/badge/License-Apache%202.0-red.svg" alt="License">
@@ -18,14 +18,17 @@ Demo预览图如下：
 
 ![Tabbar](https://github.com/kongzue/Res/raw/master/app/src/main/res/mipmap-xxxhdpi/Tabbar.png)
 
-### 优势
+## 优势
 - 无需两份图！每个 TabIcon 仅需一份颜色的图即可，Tabbar 会根据您设置的颜色自动叠加颜色！
 
 - 易于上手，快速创建，满足绝大多数导航栏使用场景。
 
 - 简单的方式就可以实现未读角标提醒。
 
-### 使用方法
+## Demo
+可通过 https://fir.im/Tabbar 下载试用
+
+## 使用方法
 
 1) 从 Maven 仓库或 jCenter 引入：
 Maven仓库：
@@ -33,14 +36,14 @@ Maven仓库：
 <dependency>
   <groupId>com.kongzue.tabbar</groupId>
   <artifactId>tabbar</artifactId>
-  <version>1.4</version>
+  <version>1.5</version>
   <type>pom</type>
 </dependency>
 ```
 Gradle：
 在dependencies{}中添加引用：
 ```
-implementation 'com.kongzue.tabbar:tabbar:1.4'
+implementation 'com.kongzue.tabbar:tabbar:1.5'
 ```
 
 2) 从XML布局文件创建：
@@ -104,7 +107,7 @@ tabbar.setTab(tabs);
 
 完成！
 
-### 额外的说明
+## 额外的说明
 1) Tab 的创建（构造）方式
 
 Tab 支持多种构建方式：
@@ -182,6 +185,38 @@ new Tab(this, "联系人", R.mipmap.img_maintab_contacts).setUnreadNum(123).setM
 
 1.4 版本起，新增了禁止选择（noSelect）和禁止颜色渲染（noDyeing）的选项，其目的是使 Tabbar 能够有更为广泛的应用场景，其中典型的场景为电商的分类选择，如下图所示：
 
+8) 二套图支持
+
+若您的设计师提供了两套完全不一样的 Tab 图标，即选中状态下显示的图标和非选中时显示的图标完全不同，不可以通过一套图染色的方式实现，可参考本章节提供的方法：
+
+首先，在 XML 中创造布局：
+```
+<com.kongzue.tabbar.TabBarView
+    android:id="@+id/tabTwoType"
+    android:layout_width="match_parent"
+    android:layout_height="58dp"
+    app:focusColor="#f14961"                        ← 此处为选中时文字的颜色
+    app:iconPadding="2dp"
+    app:normalColor="#a2a2a2"                       ← 此处为非选中时文字的颜色
+    android:background="#fff"
+    app:noDyeing="true"                             ← 设置为图标非染色模式
+    app:paddingNavigationBar="false"
+    app:tabClickBackground="ripple"
+    app:tabPaddingVertical="3dp"
+    app:textSize="12dp" />
+```
+
+接下来在代码中为 Tabbar 添加内容：
+```
+List<Tab> tabs2 = new ArrayList<>();
+tabs2.add(new Tab(this, "首页", R.mipmap.tab2_home_off).setFocusIcon(this,R.mipmap.tab2_home_on));            //使用 setFocusIcon(bitmap/drawable/resId) 来添加选中时的第二套图标
+tabs2.add(new Tab(this, "消息", R.mipmap.tab2_message_off).setFocusIcon(this,R.mipmap.tab2_message_on);
+tabs2.add(new Tab(this, "我的", R.mipmap.tab2_me_off).setFocusIcon(this,R.mipmap.tab2_me_on));
+tabTwoType.setTab(tabs2);
+```
+
+完成！
+
 ![TabbarUnread](https://github.com/kongzue/Res/raw/master/app/src/main/res/mipmap-xxxhdpi/tabbar_noselect_and_nodyeing.png)
 
 您可以通过 XML 布局文件中直接设置这些属性：
@@ -224,6 +259,9 @@ limitations under the License.
 ```
 
 ## 更新日志
+v1.5:
+- 新增二套图支持；
+
 v1.4:
 - 新增支持禁止选择（noSelect）和禁止颜色渲染（noDyeing）的选项；
 

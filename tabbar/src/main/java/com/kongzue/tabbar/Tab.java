@@ -23,6 +23,7 @@ public class Tab {
     private Bitmap icon;
     private int unreadNum;
     private int maxUnreadNum = 999;
+    private Bitmap focusIcon;
     
     public Tab(@Nullable Context context, @Nullable String name, @DrawableRes int resId) {
         setName(name);
@@ -37,6 +38,24 @@ public class Tab {
     public Tab(@Nullable String name, @Nullable Bitmap icon) {
         setName(name);
         setIcon(icon);
+    }
+    
+    public Tab(@Nullable Context context, @Nullable String name, @DrawableRes int resId, @DrawableRes int focusResId) {
+        setName(name);
+        setIcon(context, resId);
+        setFocusIcon(context, focusResId);
+    }
+    
+    public Tab(@Nullable String name, @Nullable Drawable icon, @Nullable Drawable focusIcon) {
+        setName(name);
+        setIcon(icon);
+        setFocusIcon(focusIcon);
+    }
+    
+    public Tab(@Nullable String name, @Nullable Bitmap icon, @Nullable Bitmap focusIcon) {
+        setName(name);
+        setIcon(icon);
+        setFocusIcon(focusIcon);
     }
     
     public String getName() {
@@ -83,6 +102,26 @@ public class Tab {
     
     public Tab setMaxUnreadNum(int maxUnreadNum) {
         this.maxUnreadNum = maxUnreadNum;
+        return this;
+    }
+    
+    public Bitmap getFocusIcon() {
+        return focusIcon;
+    }
+    
+    public Tab setFocusIcon(@Nullable Bitmap icon) {
+        this.focusIcon = icon;
+        return this;
+    }
+    
+    public Tab setFocusIcon(@Nullable Context context, @DrawableRes int resId) {
+        this.focusIcon = BitmapFactory.decodeResource(context.getResources(), resId);
+        return this;
+    }
+    
+    public Tab setFocusIcon(@Nullable Drawable drawable) {
+        BitmapDrawable bd = (BitmapDrawable) drawable;
+        this.focusIcon = bd.getBitmap();
         return this;
     }
 }

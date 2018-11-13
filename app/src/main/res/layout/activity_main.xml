@@ -66,6 +66,27 @@
 
                 </LinearLayout>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="5dp"
+                    android:text="二套图" />
+
+                <com.kongzue.tabbar.TabBarView
+                    android:id="@+id/tabTwoType"
+                    android:layout_width="match_parent"
+                    android:layout_height="58dp"
+                    app:focusColor="#f14961"
+                    app:iconPadding="2dp"
+                    app:normalColor="#a2a2a2"
+                    android:background="#fff"
+                    app:noDyeing="true"
+                    app:paddingNavigationBar="false"
+                    app:tabClickBackground="ripple"
+                    app:tabPaddingVertical="3dp"
+                    app:textSize="12dp" />
+
             </LinearLayout>
 
         </ScrollView>
