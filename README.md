@@ -185,7 +185,33 @@ new Tab(this, "联系人", R.mipmap.img_maintab_contacts).setUnreadNum(123).setM
 
 1.4 版本起，新增了禁止选择（noSelect）和禁止颜色渲染（noDyeing）的选项，其目的是使 Tabbar 能够有更为广泛的应用场景，其中典型的场景为电商的分类选择，如下图所示：
 
+![TabbarUnread](https://github.com/kongzue/Res/raw/master/app/src/main/res/mipmap-xxxhdpi/tabbar_noselect_and_nodyeing.png)
+
+您可以通过 XML 布局文件中直接设置这些属性：
+```
+<com.kongzue.tabbar.TabBarView
+    android:id="@+id/selectTabbar"
+    android:layout_width="match_parent"
+    android:layout_height="65dp"
+    app:iconPadding="2dp"
+    app:noDyeing="true"
+    app:noSelect="true"
+    app:normalColor="#606060"
+    app:paddingNavigationBar="false"
+    app:tabClickBackground="empty"
+    app:tabPaddingVertical="5dp"
+    app:textSize="12dp" />
+```
+
+也可以通过代码设置：
+```
+tabbar.setNoSelect(false);
+tabbar.setNoDyeing(false);
+```
+
 8) 二套图支持
+
+![Tabbar2Type](https://github.com/kongzue/Res/raw/master/app/src/main/res/mipmap-xxxhdpi/tabbar_2_type.png)
 
 若您的设计师提供了两套完全不一样的 Tab 图标，即选中状态下显示的图标和非选中时显示的图标完全不同，不可以通过一套图染色的方式实现，可参考本章节提供的方法：
 
@@ -216,30 +242,6 @@ tabTwoType.setTab(tabs2);
 ```
 
 完成！
-
-![TabbarUnread](https://github.com/kongzue/Res/raw/master/app/src/main/res/mipmap-xxxhdpi/tabbar_noselect_and_nodyeing.png)
-
-您可以通过 XML 布局文件中直接设置这些属性：
-```
-<com.kongzue.tabbar.TabBarView
-    android:id="@+id/selectTabbar"
-    android:layout_width="match_parent"
-    android:layout_height="65dp"
-    app:iconPadding="2dp"
-    app:noDyeing="true"
-    app:noSelect="true"
-    app:normalColor="#606060"
-    app:paddingNavigationBar="false"
-    app:tabClickBackground="empty"
-    app:tabPaddingVertical="5dp"
-    app:textSize="12dp" />
-```
-
-也可以通过代码设置：
-```
-tabbar.setNoSelect(false);
-tabbar.setNoDyeing(false);
-```
 
 ## 开源协议
 ```
