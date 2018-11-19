@@ -197,14 +197,15 @@ public class TabBarView extends LinearLayout {
             TextView txtName = item.findViewById(R.id.txt_name);
             
             if (i == focusIndex) {
+                
+                setImageViewColor(imgIcon, focusColor);
                 if (tabDatas.get(i).getFocusIcon() != null) {
                     imgIcon.setImageBitmap(tabDatas.get(i).getFocusIcon());
                 }
-                setImageViewColor(imgIcon, focusColor);
                 txtName.setTextColor(focusColor);
             } else {
-                imgIcon.setImageBitmap(tabDatas.get(i).getIcon());
                 setImageViewColor(imgIcon, normalColor);
+                imgIcon.setImageBitmap(tabDatas.get(i).getIcon());
                 txtName.setTextColor(normalColor);
             }
         }
