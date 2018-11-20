@@ -197,15 +197,16 @@ public class TabBarView extends LinearLayout {
             TextView txtName = item.findViewById(R.id.txt_name);
             
             if (i == focusIndex) {
-                
-                setImageViewColor(imgIcon, focusColor);
                 if (tabDatas.get(i).getFocusIcon() != null) {
                     imgIcon.setImageBitmap(tabDatas.get(i).getFocusIcon());
+                }else{
+                    imgIcon.setImageBitmap(tabDatas.get(i).getIcon());
                 }
+                setImageViewColor(imgIcon, focusColor);
                 txtName.setTextColor(focusColor);
             } else {
-                setImageViewColor(imgIcon, normalColor);
                 imgIcon.setImageBitmap(tabDatas.get(i).getIcon());
+                setImageViewColor(imgIcon, normalColor);
                 txtName.setTextColor(normalColor);
             }
         }
@@ -376,13 +377,13 @@ public class TabBarView extends LinearLayout {
         return (pxValue / Resources.getSystem().getDisplayMetrics().density);
     }
     
-    protected void setImageViewColor(ImageView view, int color) {
+    private void setImageViewColor(ImageView imageView, int color) {
         if (noDyeing) return;
-        Drawable modeDrawable = view.getDrawable().mutate();
+        Drawable modeDrawable = imageView.getDrawable().mutate();
         Drawable temp = DrawableCompat.wrap(modeDrawable);
         ColorStateList colorStateList = ColorStateList.valueOf(color);
         DrawableCompat.setTintList(temp, colorStateList);
-        view.setImageDrawable(temp);
+        imageView.setImageDrawable(temp);
     }
     
     @Override

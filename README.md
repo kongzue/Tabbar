@@ -2,10 +2,10 @@
 Kongzue Tabbar是一款简单的底部导航栏组件，仅需要简单配置即可满足绝大多数需要使用导航栏的场景。
 
 <a href="https://github.com/kongzue/Tabbar/">
-<img src="https://img.shields.io/badge/Tabbar-1.5.1-green.svg" alt="Kongzue Tabbar">
+<img src="https://img.shields.io/badge/Tabbar-1.5.2-green.svg" alt="Kongzue Tabbar">
 </a>
-<a href="https://bintray.com/myzchh/maven/tabbar/1.5.1/link">
-<img src="https://img.shields.io/badge/Maven-1.5.1-blue.svg" alt="Maven">
+<a href="https://bintray.com/myzchh/maven/tabbar/1.5.2/link">
+<img src="https://img.shields.io/badge/Maven-1.5.2-blue.svg" alt="Maven">
 </a>
 <a href="http://www.apache.org/licenses/LICENSE-2.0">
 <img src="https://img.shields.io/badge/License-Apache%202.0-red.svg" alt="License">
@@ -36,14 +36,14 @@ Maven仓库：
 <dependency>
   <groupId>com.kongzue.tabbar</groupId>
   <artifactId>tabbar</artifactId>
-  <version>1.5.1</version>
+  <version>1.5.2</version>
   <type>pom</type>
 </dependency>
 ```
 Gradle：
 在dependencies{}中添加引用：
 ```
-implementation 'com.kongzue.tabbar:tabbar:1.5.1'
+implementation 'com.kongzue.tabbar:tabbar:1.5.2'
 ```
 
 2) 从XML布局文件创建：
@@ -261,6 +261,9 @@ limitations under the License.
 ```
 
 ## 更新日志
+v1.5.2:
+- 修复在 Android 5.1.1 版本上的染色兼容问题 × 2；
+
 v1.5.1:
 - 修复在 Android 5.1.1 版本上的染色兼容问题；
 
