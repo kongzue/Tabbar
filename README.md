@@ -109,7 +109,7 @@ tabbar.setTab(tabs);
 完成！
 
 ## 额外的说明
-1) Tab 的创建（构造）方式
+### Tab 的创建（构造）方式
 
 Tab 支持多种构建方式：
 ```
@@ -126,7 +126,7 @@ Tab 亦支持 get、set 方法，可以通过他们设置属性值。
 name  | Tab 标签名称|是
 icon  | Tab 图标| 是
 
-2) 按钮点击监听
+### 按钮点击监听
 
 可通过以下代码设置监听
 ```
@@ -139,7 +139,7 @@ tabbar.setOnTabChangeListener(new OnTabChangeListener() {
 ```
 其中，index 即当前点击了哪个按钮的索引号。
 
-3) 设置默认焦点按钮：
+### 设置默认焦点按钮：
 
 可通过以下代码设置设置默认焦点按钮：
 ```
@@ -147,7 +147,7 @@ tabbar.setNormalFocusIndex(index);
 ```
 其中，index 即要设置为焦点的按钮的索引号。
 
-4) 当前提供三种 Tab 按钮按下效果:
+### 当前提供三种 Tab 按钮按下效果:
 
 字段 | 含义 | 是否默认
 ---|---|---
@@ -159,7 +159,7 @@ gray  | 纯灰色| 否
 
 ![TabbarClick](https://github.com/kongzue/Res/raw/master/app/src/main/res/mipmap-xxxhdpi/tabclickbkg.png)
 
-5) 关于沉浸式
+### 关于沉浸式
 
 当您设置开启沉浸式时可能会出现 Tabbar 被底部按键导航栏（NavigationBar）遮挡的问题，此时开启 paddingNavigationBar 即可解决此问题。设置方法为：
 
@@ -170,7 +170,7 @@ app:paddingNavigationBar = "true"
 
 开启后，Tabbar会自动设置一段 paddingBottom 边距以适应底栏高度。
 
-6) 启用未读角标
+### 启用未读角标
 
 在您创建一个Tab的时候，可以为其设置角标。
 
@@ -189,7 +189,7 @@ tabbar.setUnreadNum(2, 123);
 //备注：可通过设置未读数量为 0 来清除角标。
 ```
 
-7) 禁用选择和禁用染色
+### 禁用选择和禁用染色
 
 1.4 版本起，新增了禁止选择（noSelect）和禁止颜色渲染（noDyeing）的选项，其目的是使 Tabbar 能够有更为广泛的应用场景，其中典型的场景为电商的分类选择，如下图所示：
 
@@ -217,7 +217,7 @@ tabbar.setNoSelect(false);
 tabbar.setNoDyeing(false);
 ```
 
-8) 二套图支持
+### 二套图支持
 
 ![Tabbar2Type](https://github.com/kongzue/Res/raw/master/app/src/main/res/mipmap-xxxhdpi/tabbar_2_type.png)
 
@@ -251,7 +251,7 @@ tabTwoType.setTab(tabs2);
 
 完成！
 
-9) 分隔线
+### 分隔线
 
 从 1.5.3 版本起支持了分割线功能，可设置属性来启用：
 ```
