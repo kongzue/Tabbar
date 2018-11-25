@@ -17,6 +17,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -50,7 +51,8 @@ public class TabBarView extends LinearLayout {
     private int tabClickBackground;         //tab按钮按下效果可选值
     private boolean paddingNavigationBar;   //padding底部导航栏高度
     private boolean noDyeing;               //不使用颜色渲染（即使用图表本身的颜色）
-    private boolean noSelect;               //不选中模式（）
+    private boolean noSelect;               //不选中模式
+    private int splitLine;                  //分割线（资源id）
     
     public enum TabClickBackgroundValue {
         RIPPLE,                         //矩形水波纹
@@ -96,6 +98,7 @@ public class TabBarView extends LinearLayout {
         paddingNavigationBar = typedArray.getBoolean(R.styleable.TabBar_paddingNavigationBar, paddingNavigationBar);
         noDyeing = typedArray.getBoolean(R.styleable.TabBar_noDyeing, noDyeing);
         noSelect = typedArray.getBoolean(R.styleable.TabBar_noSelect, noSelect);
+        splitLine = typedArray.getResourceId(R.styleable.TabBar_splitLine, splitLine);
         
         typedArray.recycle();
     }
@@ -110,11 +113,6 @@ public class TabBarView extends LinearLayout {
         focusColor = Color.rgb(62, 120, 238);
         normalColor = Color.rgb(96, 96, 96);
     }
-    
-    private ImageView imgIcon;
-    private RelativeLayout boxNoread;
-    private TextView txtNoread;
-    private TextView txtName;
     
     private View rootView;
     private List<Tab> tabDatas;
@@ -132,10 +130,10 @@ public class TabBarView extends LinearLayout {
             
             addView(item);
             
-            imgIcon = item.findViewById(R.id.img_icon);
-            boxNoread = item.findViewById(R.id.box_noread);
-            txtNoread = item.findViewById(R.id.txt_noread);
-            txtName = item.findViewById(R.id.txt_name);
+            ImageView imgIcon = item.findViewById(R.id.img_icon);
+            RelativeLayout boxNoread = item.findViewById(R.id.box_noread);
+            TextView txtNoread = item.findViewById(R.id.txt_noread);
+            TextView txtName = item.findViewById(R.id.txt_name);
             
             imgIcon.setImageBitmap(tab.getIcon());
             txtName.setText(tab.getName());
@@ -166,6 +164,24 @@ public class TabBarView extends LinearLayout {
             params.gravity = Gravity.CENTER;
             item.setLayoutParams(params);
             
+            if (splitLine!=0) {
+                if (i != tabDatas.size() - 1) {
+                    ImageView imgSplitLine = new ImageView(context);
+                    FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(1, FrameLayout.LayoutParams.FILL_PARENT);
+                    imgSplitLine.setLayoutParams(layoutParams);
+                    String resType = context.getResources().getResourceTypeName(splitLine);
+                    if (resType.equals("drawable")) {
+                        Drawable drawable = context.getResources().getDrawable(splitLine);
+                        imgSplitLine.setImageDrawable(drawable);
+                        addView(imgSplitLine);
+                    }
+                    if (resType.equals("color")) {
+                        int color = context.getResources().getColor(splitLine);
+                        imgSplitLine.setBackgroundColor(color);
+                        addView(imgSplitLine);
+                    }
+                }
+            }
             tabViews.add(item);
         }
         refreshFocusTabStatus();
@@ -199,7 +215,7 @@ public class TabBarView extends LinearLayout {
             if (i == focusIndex) {
                 if (tabDatas.get(i).getFocusIcon() != null) {
                     imgIcon.setImageBitmap(tabDatas.get(i).getFocusIcon());
-                }else{
+                } else {
                     imgIcon.setImageBitmap(tabDatas.get(i).getIcon());
                 }
                 setImageViewColor(imgIcon, focusColor);
@@ -397,5 +413,36 @@ public class TabBarView extends LinearLayout {
                 setPadding(0, -navHeight / 2, 0, navHeight / 2);
             }
         }
+    }
+    
+    public void setUnreadNum(int index, int unreadNum) {
+        Tab tab = tabDatas.get(index);
+        tab.setUnreadNum(unreadNum);
+        View tabView = tabViews.get(index);
+        RelativeLayout boxNoread = tabView.findViewById(R.id.box_noread);
+        TextView txtNoread = tabView.findViewById(R.id.txt_noread);
+        if (tab.getUnreadNum() != 0) {
+            boxNoread.setVisibility(VISIBLE);
+            int left = (int) (tabView.getWidth() / 2 + (height - tabPaddingVertical - textSize) * 0.55);
+            boxNoread.setX(left);
+            if (tab.getUnreadNum() < 0) {
+                txtNoread.setVisibility(GONE);
+            } else {
+                txtNoread.setVisibility(VISIBLE);
+                if (tab.getUnreadNum() > tab.getMaxUnreadNum()) {
+                    txtNoread.setText(tab.getMaxUnreadNum() + "+");
+                } else {
+                    txtNoread.setText(tab.getUnreadNum() + "");
+                }
+            }
+        } else {
+            boxNoread.setVisibility(GONE);
+        }
+    }
+    
+    public View getChild(int index) {
+        if (tabViews == null) return null;
+        if (index < 0 || index >= tabViews.size()) return null;
+        return tabViews.get(index);
     }
 }

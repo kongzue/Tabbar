@@ -33,10 +33,10 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="10dp"
-                    android:paddingHorizontal="15dp"
                     android:background="#fff"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="10dp">
 
                     <com.kongzue.tabbar.TabBarView
                         android:id="@+id/selectTabbar"
@@ -77,12 +77,13 @@
                     android:id="@+id/tabTwoType"
                     android:layout_width="match_parent"
                     android:layout_height="58dp"
+                    android:background="#fff"
                     app:focusColor="#f14961"
                     app:iconPadding="2dp"
-                    app:normalColor="#a2a2a2"
-                    android:background="#fff"
                     app:noDyeing="true"
+                    app:normalColor="#a2a2a2"
                     app:paddingNavigationBar="false"
+                    app:splitLine="@drawable/split_line"
                     app:tabClickBackground="ripple"
                     app:tabPaddingVertical="3dp"
                     app:textSize="12dp" />

@@ -17,5 +17,6 @@
             <enum name="empty" value="3"/>
         </attr>
         <attr name="paddingNavigationBar" format="boolean"/>
+        <attr name="splitLine" format="reference"/>
     </declare-styleable>
 </resources>

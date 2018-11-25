@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onTabChanged(View v, int index) {
                         Log.i(">>>", "onTabChanged: " + index);
+                        tabTwoType.setUnreadNum(2,index-1);
                     }
                 })
                 .setNormalFocusIndex(1)
@@ -81,6 +82,6 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .setNormalFocusIndex(1)
         ;
-        
+    
     }
 }
