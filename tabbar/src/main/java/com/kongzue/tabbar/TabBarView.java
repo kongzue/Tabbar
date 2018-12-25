@@ -53,6 +53,7 @@ public class TabBarView extends LinearLayout {
     private boolean noDyeing;               //不使用颜色渲染（即使用图表本身的颜色）
     private boolean noSelect;               //不选中模式
     private int splitLine;                  //分割线（资源id）
+    private int unreadBackground;           //未读标记背景
     
     public enum TabClickBackgroundValue {
         RIPPLE,                         //矩形水波纹
@@ -99,6 +100,7 @@ public class TabBarView extends LinearLayout {
         noDyeing = typedArray.getBoolean(R.styleable.TabBar_noDyeing, noDyeing);
         noSelect = typedArray.getBoolean(R.styleable.TabBar_noSelect, noSelect);
         splitLine = typedArray.getResourceId(R.styleable.TabBar_splitLine, splitLine);
+        unreadBackground = typedArray.getResourceId(R.styleable.TabBar_unreadBackground, unreadBackground);
         
         typedArray.recycle();
     }
@@ -164,7 +166,7 @@ public class TabBarView extends LinearLayout {
             params.gravity = Gravity.CENTER;
             item.setLayoutParams(params);
             
-            if (splitLine!=0) {
+            if (splitLine != 0) {
                 if (i != tabDatas.size() - 1) {
                     ImageView imgSplitLine = new ImageView(context);
                     FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(1, FrameLayout.LayoutParams.FILL_PARENT);
@@ -181,6 +183,10 @@ public class TabBarView extends LinearLayout {
                         addView(imgSplitLine);
                     }
                 }
+            }
+            
+            if (unreadBackground != 0) {
+                boxNoread.setBackgroundResource(unreadBackground);
             }
             tabViews.add(item);
         }
@@ -331,6 +337,23 @@ public class TabBarView extends LinearLayout {
     
     public int getNormalColor() {
         return normalColor;
+    }
+    
+    public int getUnreadBackground() {
+        return unreadBackground;
+    }
+    
+    public void setUnreadBackground(int unreadBackgroundResId) {
+        this.unreadBackground = unreadBackgroundResId;
+    
+        for (int i = 0; i < tabViews.size(); i++) {
+            View item = tabViews.get(i);
+            RelativeLayout boxNoread = item.findViewById(R.id.box_noread);
+    
+            if (unreadBackground != 0) {
+                if (boxNoread!=null)boxNoread.setBackgroundResource(unreadBackground);
+            }
+        }
     }
     
     /**

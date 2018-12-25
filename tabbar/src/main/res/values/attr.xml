@@ -18,5 +18,6 @@
         </attr>
         <attr name="paddingNavigationBar" format="boolean"/>
         <attr name="splitLine" format="reference"/>
+        <attr name="unreadBackground" format="reference"/>
     </declare-styleable>
 </resources>

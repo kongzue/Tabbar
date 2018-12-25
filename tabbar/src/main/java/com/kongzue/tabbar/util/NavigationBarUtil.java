@@ -16,11 +16,18 @@ import android.view.Display;
  */
 public class NavigationBarUtil {
     
+    public static boolean setNavigationBarHeightZero = false;
+    
     public static int getNavbarHeight(Activity context) {
-        int rootHeight = getRootHeight(context);
-        int navbarHeight = rootHeight - context.getWindowManager().getDefaultDisplay().getHeight();
-        if (navbarHeight < 0) navbarHeight = 0;
-        return navbarHeight;
+        if (setNavigationBarHeightZero) return 0;
+        int result = 0;
+        int resourceId = 0;
+        int rid = context.getResources().getIdentifier("config_showNavigationBar", "bool", "android");
+        if (rid != 0) {
+            resourceId = context.getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+            return context.getResources().getDimensionPixelSize(resourceId);
+        } else
+            return 0;
     }
     
     private static int getRootHeight(Activity context) {

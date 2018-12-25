@@ -2,10 +2,10 @@
 Kongzue Tabbar是一款简单的底部导航栏组件，仅需要简单配置即可满足绝大多数需要使用导航栏的场景。
 
 <a href="https://github.com/kongzue/Tabbar/">
-<img src="https://img.shields.io/badge/Tabbar-1.5.3-green.svg" alt="Kongzue Tabbar">
+<img src="https://img.shields.io/badge/Tabbar-1.5.4-green.svg" alt="Kongzue Tabbar">
 </a>
-<a href="https://bintray.com/myzchh/maven/tabbar/1.5.3/link">
-<img src="https://img.shields.io/badge/Maven-1.5.3-blue.svg" alt="Maven">
+<a href="https://bintray.com/myzchh/maven/tabbar/1.5.4/link">
+<img src="https://img.shields.io/badge/Maven-1.5.4-blue.svg" alt="Maven">
 </a>
 <a href="http://www.apache.org/licenses/LICENSE-2.0">
 <img src="https://img.shields.io/badge/License-Apache%202.0-red.svg" alt="License">
@@ -36,14 +36,14 @@ Maven仓库：
 <dependency>
   <groupId>com.kongzue.tabbar</groupId>
   <artifactId>tabbar</artifactId>
-  <version>1.5.3</version>
+  <version>1.5.4</version>
   <type>pom</type>
 </dependency>
 ```
 Gradle：
 在dependencies{}中添加引用：
 ```
-implementation 'com.kongzue.tabbar:tabbar:1.5.3'
+implementation 'com.kongzue.tabbar:tabbar:1.5.4'
 ```
 
 2) 从XML布局文件创建：
@@ -74,6 +74,7 @@ paddingNavigationBar | 是否开启底部导航栏沉浸式 | false
 noDyeing | 禁止染色 | false
 noSelect | 禁止选择 | false
 splitLine | 分隔线 | resId
+unreadBackground | 未读消息小红点背景 | resId
 
 也可通过set方法设置：
 ```
@@ -294,6 +295,10 @@ limitations under the License.
 ```
 
 ## 更新日志
+v1.5.4:
+- 修复了获取导航栏高度值错误的问题；
+- 新增未读表计小红点属性设置 unreadBackground；
+
 v1.5.3:
 - 新增方法 setUnreadNum(index, unreadNum) 用以直接设置未读数量；
 - 新增方法 getChild(index) 可以直接获取对应子按钮；
