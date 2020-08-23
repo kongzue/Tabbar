@@ -43,7 +43,11 @@ Maven仓库：
 Gradle：
 在dependencies{}中添加引用：
 ```
-implementation 'com.kongzue.tabbar:tabbar:1.5.4'
+implementation 'com.kongzue.tabbar:tabbar:1.5.4.1'
+```
+AndroidX 版本：
+```
+implementation 'com.kongzue.tabbarx:tabbar:1.5.4'
 ```
 
 2) 从XML布局文件创建：
@@ -295,6 +299,9 @@ limitations under the License.
 ```
 
 ## 更新日志
+v1.5.4.1（测试版本）:
+- 修复bug；
+
 v1.5.4:
 - 修复了获取导航栏高度值错误的问题；
 - 新增未读表计小红点属性设置 unreadBackground；
