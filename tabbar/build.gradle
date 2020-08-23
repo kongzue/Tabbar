@@ -5,15 +5,15 @@ apply plugin: 'com.jfrog.bintray'
 def siteUrl = 'https://github.com/kongzue/Tabbar' //项目在github主页地址
 def gitUrl = 'https://github.com/kongzue/Tabbar.git'   //Git仓库的地址
 
-group = "com.kongzue.tabbar"//发布aar前缀根节点
+group = "com.kongzue.tabbarx"//发布aar前缀根节点
 version = "1.5.4"//发布aar的库版本
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 30
         versionCode 15
         versionName "1.5.4"
     }
@@ -36,7 +36,7 @@ install {
         pom {
             project {
                 packaging 'aar'
-                name 'tabbar'//添加项目描述
+                name 'TabbarX'//添加项目描述
                 url siteUrl
                 licenses {
                     license {
@@ -77,7 +77,7 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = "maven"
-        name = "tabbar" //项目在JCenter的名字
+        name = "TabbarX" //项目在JCenter的名字
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
@@ -87,6 +87,5 @@ bintray {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.0+'
 }

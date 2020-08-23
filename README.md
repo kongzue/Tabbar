@@ -45,6 +45,10 @@ Gradle：
 ```
 implementation 'com.kongzue.tabbar:tabbar:1.5.4'
 ```
+AndroidX 版本：
+```
+implementation 'com.kongzue.tabbar:tabbar:1.5.4'
+```
 
 2) 从XML布局文件创建：
 ```

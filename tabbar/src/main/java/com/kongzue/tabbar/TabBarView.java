@@ -7,16 +7,14 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorInt;
-import android.support.annotation.Nullable;
-import android.support.v4.graphics.drawable.DrawableCompat;
+import androidx.annotation.ColorInt;
+import androidx.annotation.Nullable;
+import androidx.core.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -279,6 +277,13 @@ public class TabBarView extends LinearLayout {
         return this;
     }
     
+    public TabBarView callOnTabChangeListenerChange() {
+        if (onTabChangeListener != null) {
+            onTabChangeListener.onTabChanged(getChildAt(focusIndex), focusIndex);
+        }
+        return this;
+    }
+    
     public int getTabPaddingVertical() {
         return tabPaddingVertical;
     }
@@ -345,13 +350,13 @@ public class TabBarView extends LinearLayout {
     
     public void setUnreadBackground(int unreadBackgroundResId) {
         this.unreadBackground = unreadBackgroundResId;
-    
+        
         for (int i = 0; i < tabViews.size(); i++) {
             View item = tabViews.get(i);
             RelativeLayout boxNoread = item.findViewById(R.id.box_noread);
-    
+            
             if (unreadBackground != 0) {
-                if (boxNoread!=null)boxNoread.setBackgroundResource(unreadBackground);
+                if (boxNoread != null) boxNoread.setBackgroundResource(unreadBackground);
             }
         }
     }
