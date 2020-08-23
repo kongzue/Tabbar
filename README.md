@@ -26,7 +26,7 @@ Demo预览图如下：
 - 简单的方式就可以实现未读角标提醒。
 
 ## Demo
-可通过 https://fir.im/Tabbar 下载试用
+可通过 http://beta.kongzue.com/Tabbar 下载试用
 
 ## 使用方法
 
