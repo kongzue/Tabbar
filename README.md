@@ -45,7 +45,7 @@ Gradle：
 ```
 implementation 'com.kongzue.tabbar:tabbar:1.5.4.1'
 ```
-AndroidX 版本：
+🆕 AndroidX 版本：
 ```
 implementation 'com.kongzue.tabbarx:tabbar:1.5.4'
 ```
