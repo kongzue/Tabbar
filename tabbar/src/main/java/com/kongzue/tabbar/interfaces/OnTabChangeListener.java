@@ -10,5 +10,5 @@ import android.view.View;
  * CreateTime: 2018/9/28 12:17
  */
 public interface OnTabChangeListener {
-    void onTabChanged(View v, int index);
+    boolean onTabChanged(View v, int index);
 }

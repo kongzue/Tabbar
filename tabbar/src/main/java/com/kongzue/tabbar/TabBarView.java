@@ -240,10 +240,15 @@ public class TabBarView extends LinearLayout {
             item.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    focusIndex = selectIndex;
-                    refreshFocusTabStatus();
-                    if (onTabChangeListener != null)
-                        onTabChangeListener.onTabChanged(v, focusIndex);
+                    if (onTabChangeListener != null){
+                        if (!onTabChangeListener.onTabChanged(v, focusIndex)){
+                            focusIndex = selectIndex;
+                            refreshFocusTabStatus();
+                        }
+                    }else{
+                        focusIndex = selectIndex;
+                        refreshFocusTabStatus();
+                    }
                 }
             });
         }
