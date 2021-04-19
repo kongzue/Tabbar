@@ -45,7 +45,7 @@ allprojects {
 }
 ```
 
-进入 build.gradle(app) 在 `dependencies{}` 中添加引用：
+2) 进入 build.gradle(app) 在 `dependencies{}` 中添加引用：
 
 latest.release = ![](https://jitpack.io/v/kongzue/Tabbar.svg)
 
