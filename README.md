@@ -47,7 +47,7 @@ allprojects {
 
 进入 build.gradle(app) 在 `dependencies{}` 中添加引用：
 
-![](https://jitpack.io/v/kongzue/Tabbar.svg)
+latest.release = ![](https://jitpack.io/v/kongzue/Tabbar.svg)
 
 ```
 implementation 'com.github.kongzue:Tabbar:latest.release'
