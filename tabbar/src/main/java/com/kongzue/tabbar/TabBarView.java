@@ -8,6 +8,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -236,17 +237,17 @@ public class TabBarView extends LinearLayout {
     private void setEvents() {
         for (int i = 0; i < tabViews.size(); i++) {
             View item = tabViews.get(i);
-            final int selectIndex = i;
             item.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    int index = tabViews.indexOf(v);
                     if (onTabChangeListener != null){
-                        if (!onTabChangeListener.onTabChanged(v, focusIndex)){
-                            focusIndex = selectIndex;
+                        if (!onTabChangeListener.onTabChanged(v, index)){
+                            focusIndex = index;
                             refreshFocusTabStatus();
                         }
                     }else{
-                        focusIndex = selectIndex;
+                        focusIndex = index;
                         refreshFocusTabStatus();
                     }
                 }

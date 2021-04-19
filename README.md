@@ -2,10 +2,13 @@
 Kongzue Tabbar是一款简单的底部导航栏组件，仅需要简单配置即可满足绝大多数需要使用导航栏的场景。
 
 <a href="https://github.com/kongzue/Tabbar/">
-<img src="https://img.shields.io/badge/Tabbar-1.5.5-green.svg" alt="Kongzue Tabbar">
+<img src="https://img.shields.io/badge/Kongzue-Tabbar-green.svg" alt="Kongzue Tabbar">
 </a>
-<a href="https://bintray.com/myzchh/maven/tabbar/1.5.5/link">
-<img src="https://img.shields.io/badge/Maven-1.5.5-blue.svg" alt="Maven">
+<a href="https://bintray.com/myzchh/maven/tabbar/1.5.4/link">
+<img src="https://img.shields.io/badge/jCenter-1.5.4-blue.svg" alt="jCenter">
+</a>
+<a href="https://jitpack.io/#kongzue/Tabbar">
+<img src="https://jitpack.io/v/kongzue/Tabbar.svg" alt="jitpack">
 </a>
 <a href="http://www.apache.org/licenses/LICENSE-2.0">
 <img src="https://img.shields.io/badge/License-Apache%202.0-red.svg" alt="License">
@@ -32,13 +35,36 @@ Demo预览图如下：
 
 ### AndroidX 版本：
 
+1) 先在 build.gradle(project) 中找到 `allprojects{}` 代码块添加：
 ```
-implementation 'com.kongzue.tabbarx:tabbar:1.5.4'
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+进入 build.gradle(app) 在 `dependencies{}` 中添加引用：
+
+![](https://jitpack.io/v/kongzue/Tabbar.svg)
+
+```
+implementation 'com.github.kongzue:Tabbar:latest.release'
 ```
 
 ### Support 版本
 
+请注意，因 jCenter 停止服务支持以及 Support 支持库的维护关系，Support 版本不再进行更新，建议尽早升级至 AndroidX 版本，最后的 Support 版本引入方式：
+
 从 Maven 仓库或 jCenter 引入：
+
+Gradle：
+
+在dependencies{}中添加引用：
+```
+implementation 'com.kongzue.tabbar:tabbar:1.5.4.1'
+```
 
 Maven仓库：
 ```
@@ -48,13 +74,6 @@ Maven仓库：
   <version>1.5.4</version>
   <type>pom</type>
 </dependency>
-```
-
-Gradle：
-
-在dependencies{}中添加引用：
-```
-implementation 'com.kongzue.tabbar:tabbar:1.5.4.1'
 ```
 
 ## 使用方法
