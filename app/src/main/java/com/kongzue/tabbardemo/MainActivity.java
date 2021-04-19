@@ -1,11 +1,11 @@
 package com.kongzue.tabbardemo;
 
-import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.kongzue.tabbar.Tab;
 import com.kongzue.tabbar.TabBarView;

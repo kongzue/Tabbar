@@ -2,10 +2,10 @@
 Kongzue Tabbar是一款简单的底部导航栏组件，仅需要简单配置即可满足绝大多数需要使用导航栏的场景。
 
 <a href="https://github.com/kongzue/Tabbar/">
-<img src="https://img.shields.io/badge/Tabbar-1.5.4-green.svg" alt="Kongzue Tabbar">
+<img src="https://img.shields.io/badge/Tabbar-1.5.5-green.svg" alt="Kongzue Tabbar">
 </a>
-<a href="https://bintray.com/myzchh/maven/tabbar/1.5.4/link">
-<img src="https://img.shields.io/badge/Maven-1.5.4-blue.svg" alt="Maven">
+<a href="https://bintray.com/myzchh/maven/tabbar/1.5.5/link">
+<img src="https://img.shields.io/badge/Maven-1.5.5-blue.svg" alt="Maven">
 </a>
 <a href="http://www.apache.org/licenses/LICENSE-2.0">
 <img src="https://img.shields.io/badge/License-Apache%202.0-red.svg" alt="License">
@@ -28,9 +28,18 @@ Demo预览图如下：
 ## Demo
 可通过 http://beta.kongzue.com/Tabbar 下载试用
 
-## 使用方法
+## 引入
 
-1) 从 Maven 仓库或 jCenter 引入：
+### AndroidX 版本：
+
+```
+implementation 'com.kongzue.tabbarx:tabbar:1.5.4'
+```
+
+### Support 版本
+
+从 Maven 仓库或 jCenter 引入：
+
 Maven仓库：
 ```
 <dependency>
@@ -40,17 +49,17 @@ Maven仓库：
   <type>pom</type>
 </dependency>
 ```
+
 Gradle：
+
 在dependencies{}中添加引用：
 ```
 implementation 'com.kongzue.tabbar:tabbar:1.5.4.1'
 ```
-🆕 AndroidX 版本：
-```
-implementation 'com.kongzue.tabbarx:tabbar:1.5.4'
-```
 
-2) 从XML布局文件创建：
+## 使用方法
+
+1) 从XML布局文件创建：
 ```
 <com.kongzue.tabbar.TabBarView xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/tabbar"
@@ -96,7 +105,7 @@ tabbar.setNoSelect(false);                                                  //�
 tabbar.setNoDyeing(false);                                                  //是否禁止颜色渲染
 ```
 
-3) 创建Tab：
+2) 创建Tab：
 
 首先需要创建一个 List<Tab> 用来存放Tab数据：
 ```
