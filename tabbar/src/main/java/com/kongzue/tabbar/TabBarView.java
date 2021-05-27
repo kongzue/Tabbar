@@ -54,6 +54,7 @@ public class TabBarView extends LinearLayout {
     private boolean noSelect;               //不选中模式
     private int splitLine;                  //分割线（资源id）
     private int unreadBackground;           //未读标记背景
+    private boolean focusBold;              //选中加粗
     
     public enum TabClickBackgroundValue {
         RIPPLE,                         //矩形水波纹
@@ -99,6 +100,7 @@ public class TabBarView extends LinearLayout {
         paddingNavigationBar = typedArray.getBoolean(R.styleable.TabBar_paddingNavigationBar, paddingNavigationBar);
         noDyeing = typedArray.getBoolean(R.styleable.TabBar_noDyeing, noDyeing);
         noSelect = typedArray.getBoolean(R.styleable.TabBar_noSelect, noSelect);
+        focusBold = typedArray.getBoolean(R.styleable.TabBar_focusBold, noSelect);
         splitLine = typedArray.getResourceId(R.styleable.TabBar_splitLine, splitLine);
         unreadBackground = typedArray.getResourceId(R.styleable.TabBar_unreadBackground, unreadBackground);
         
@@ -226,10 +228,14 @@ public class TabBarView extends LinearLayout {
                 }
                 setImageViewColor(imgIcon, focusColor);
                 txtName.setTextColor(focusColor);
+                if (focusBold) {
+                    txtName.getPaint().setFakeBoldText(true);
+                }
             } else {
                 imgIcon.setImageBitmap(tabDatas.get(i).getIcon());
                 setImageViewColor(imgIcon, normalColor);
                 txtName.setTextColor(normalColor);
+                txtName.getPaint().setFakeBoldText(false);
             }
         }
     }
@@ -241,12 +247,12 @@ public class TabBarView extends LinearLayout {
                 @Override
                 public void onClick(View v) {
                     int index = tabViews.indexOf(v);
-                    if (onTabChangeListener != null){
-                        if (!onTabChangeListener.onTabChanged(v, index)){
+                    if (onTabChangeListener != null) {
+                        if (!onTabChangeListener.onTabChanged(v, index)) {
                             focusIndex = index;
                             refreshFocusTabStatus();
                         }
-                    }else{
+                    } else {
                         focusIndex = index;
                         refreshFocusTabStatus();
                     }

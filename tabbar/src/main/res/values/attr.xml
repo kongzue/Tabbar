@@ -6,6 +6,7 @@
         <attr name="tabPaddingVertical" format="dimension"/>
         <attr name="noDyeing" format="boolean"/>
         <attr name="noSelect" format="boolean"/>
+        <attr name="focusBold" format="boolean"/>
         <attr name="iconPadding" format="dimension"/>
         <attr name="textSize" format="dimension"/>
         <attr name="focusColor" format="color"/>
